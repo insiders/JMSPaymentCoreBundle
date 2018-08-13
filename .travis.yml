@@ -3,6 +3,7 @@ language: php
 branches:
   only:
     - master
+    - feature/ODP-3473
 
 cache:
   directories:
