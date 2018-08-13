@@ -5,11 +5,6 @@ function shouldBuildDocs()
     return isLatestPhp() && isLatestSymfony();
 }
 
-function isHhvm()
-{
-    return getPhpVersion() === 'hhvm';
-}
-
 function isLatestPhp()
 {
     return getPhpVersion() === '7.1';
@@ -17,7 +12,7 @@ function isLatestPhp()
 
 function isLatestSymfony()
 {
-    return getSymfonyVersion() === '3.2.*';
+    return getSymfonyVersion() === '3.3.*';
 }
 
 function getSymfonyVersion()
