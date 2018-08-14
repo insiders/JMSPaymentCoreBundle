@@ -17,7 +17,7 @@ class BasicEntityInteractionsTest extends BaseTestCase
         $c = self::$kernel->getContainer();
         $ppc = $c->get('payment.plugin_controller');
         $em = $c->get('doctrine.orm.entity_manager');
-        $instruction = new PaymentInstruction(123.45, 'EUR', 'test_plugin');
+        $instruction = new PaymentInstruction(123.45, 'EUR', 'paypal_express_checkout');
         $ppc->createPaymentInstruction($instruction);
         $credit = $ppc->createIndependentCredit($instruction->getId(), 123);
 
@@ -25,7 +25,7 @@ class BasicEntityInteractionsTest extends BaseTestCase
 
         $rInstruction = $ppc->getPaymentInstruction($instruction->getId());
         $this->assertNotSame($instruction, $rInstruction);
-//        $this->assertEquals(1, $rInstruction->getCredits()->count());
-//        $this->assertEquals($credit->getId(), $rInstruction->getCredits()->first()->getId());
+        $this->assertEquals(1, $rInstruction->getCredits()->count());
+        $this->assertEquals($credit->getId(), $rInstruction->getCredits()->first()->getId());
     }
 }

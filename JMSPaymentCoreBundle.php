@@ -30,8 +30,12 @@ class JMSPaymentCoreBundle extends Bundle
 {
     public function boot()
     {
-        if ($this->container->has('payment.encryption')) {
-            ExtendedDataType::setEncryptionService($this->container->get('payment.encryption'));
+        //TODO alias resolving does not consider the service as public, resolve the aliased service directly
+        //if ($this->container->has('payment.encryption')) {
+        //    ExtendedDataType::setEncryptionService($this->container->get('payment.encryption'));
+        //}
+        if ($this->container->has('payment.encryption.defuse_php_encryption')) {
+            ExtendedDataType::setEncryptionService($this->container->get('payment.encryption.defuse_php_encryption'));
         }
     }
 
