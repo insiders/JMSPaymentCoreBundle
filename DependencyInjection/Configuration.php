@@ -32,9 +32,15 @@ class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
+        if (method_exists(TreeBuilder::class, 'getRootNode')) {
+            $treeBuilder = new TreeBuilder($this->alias);
+            $rootNode = $treeBuilder->getRootNode();
+        } else {
+            $treeBuilder = new TreeBuilder();
+            $rootNode = $treeBuilder->root($this->alias);
+        }
 
-        $builder->root($this->alias, 'array')
+        $rootNode
             ->children()
                 ->arrayNode('encryption')
                     ->canBeEnabled()
@@ -73,7 +79,7 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        return $builder;
+        return $treeBuilder;
     }
 
     private function getSecretDeprecationMessage()
