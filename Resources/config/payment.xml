@@ -58,7 +58,7 @@
             <tag name="payment.encryption" alias="mcrypt" />
         </service>
 
-        <service id="payment.encryption.defuse_php_encryption" class="%payment.encryption.defuse_php_encryption.class%">
+        <service id="payment.encryption.defuse_php_encryption" class="%payment.encryption.defuse_php_encryption.class%" public="true">
             <argument>%payment.encryption.defuse_php_encryption.secret%</argument>
             <tag name="payment.encryption" alias="defuse_php_encryption" />
         </service>
